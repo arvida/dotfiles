@@ -1,0 +1,24 @@
+[user]
+  name = Arvid Andersson
+  email = arvid.andersson@oktavilla.se
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[format]
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar ▲ %ad) %C(bold blue)<%an>%Creset
+[alias]
+  ra = !git r --all
+  l = log --graph --abbrev-commit --date local
+  pr = pull --rebase 

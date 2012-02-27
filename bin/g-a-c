@@ -1,0 +1,22 @@
+#!/bin/bash
+
+GREEN="\033[0;32m" 
+RED="\033[0;31m" 
+END_COLOR="\033[0m"
+
+CONTINUE="n"
+
+while true; do
+  git add -i
+  echo ""
+  git commit
+  
+  echo ""
+  echo -ne "# Do another commit? [${GREEN}y${END_COLOR}/${RED}n${END_COLOR}]: "; read CONTINUE;
+
+  if [ "$CONTINUE" != "y" ]; then
+    break
+  else
+    echo ""
+  fi
+done
