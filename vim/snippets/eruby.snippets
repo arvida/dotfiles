@@ -1,0 +1,25 @@
+snippet <
+	<%= ${1} %>
+snippet >
+	<% ${1} %>
+snippet li
+	<%= link_to ${1}, ${2} %>
+snippet each
+	<% ${1}.each do |${2:item}| %>
+		${3}
+	<% end %>
+snippet part
+	<%= render :partial => '${1}', :locals => {${2}} %>
+snippet partc
+	<%= render :partial => '${1}', :collection => ${2} %>
+snippet ff
+	<% form_from ${1}, :url => ${2} do |f| %>
+		${3}
+	<% end %>
+snippet tf
+	<%= f.label :${1:} %>
+	<%= f.text_field :$1 %>
+snippet ts
+	t(:${1}, :scope => [:${2}]) 
+snippet #
+	#{${1}} 

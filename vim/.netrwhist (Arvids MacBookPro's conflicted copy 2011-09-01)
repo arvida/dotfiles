@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/arvid/Dropbox/Env/Sites/Unicef-3.0'
+let g:netrw_dirhist_2='/Users/arvid/Dropbox/Env/Sites/Porthos-Engine'
+let g:netrw_dirhist_3='/Users/arvid/Dropbox/Env/Sites/Unicef-3.0'
+let g:netrw_dirhist_4='/Users/arvid/Dropbox/Env/Sites/PortfolioDeck'
+let g:netrw_dirhist_5='/Users/arvid/Dropbox/Env/Sites/Porthos-Engine'
+let g:netrw_dirhist_6='/Users/arvid/Dropbox/Env/Sites/karneval'
+let g:netrw_dirhist_7='/Users/arvid/Dropbox/Env/Sites/Porthos-Engine'
+let g:netrw_dirhist_8='/Users/arvid/Desktop/UNICEF'
+let g:netrw_dirhist_9='/Users/arvid/Dropbox/Env/Sites/Unicef-3.0'
