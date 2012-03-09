@@ -140,6 +140,9 @@ nmap <Space> i_<Esc>r
 " From: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 :nnoremap <CR> :nohlsearch<CR><CR>
 
+" https://github.com/henrik/dotfiles/commit/aaa45c1cc0f9a6195a9155223a7e904aa10b256f
+command! -bar -range=% NotRocket execute '<line1>,<line2>s/:\(\w\+\)\s*=>/\1:/e' . (&gdefault ? '' : 'g')
+
 " Omni Completion *************************************************************
 autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python set omnifunc=pythoncomplete#Complete
