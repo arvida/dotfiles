@@ -9,14 +9,26 @@
 " return = clear highlights from search
 " ,p = previous buffer
 " ctrl-j/k = jump paragraph
+"
+set nocompatible
+
+" Pathogenize it!
+call pathogen#infect()
+
+if has("gui_running")
+  set shellcmdflag=-ic
+  set guioptions=egmrt
+  set gfn=Menlo\ for\ Powerline:h14 
+  set shell=bash
+  set guioptions-=r 
+endif
 
 set hidden
-set nocompatible
 let mapleader = ","
-map q :CommandT<CR>
 set ttyfast
+set encoding=utf-8
 
-" Make clipbaord work with MacOS
+" Make clipboard work with MacOS
 set clipboard=unnamed
 
 autocmd FileType c,cpp,java,php,ruby,eruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -56,16 +68,22 @@ set ignorecase " Ignore case when searching
 set smartcase " Ignore case when searching lowercase
 
 " Colors **********************************************************************
-set t_Co=256 
-syntax on 
-set background=dark
-colorscheme Tomorrow-Night-Eighties
+if has("gui_running")
+  colorscheme Tomorrow-Night-Eighties-My
+else
+  syntax on
+  set background=dark
+  set t_Co=256 
+  set term=xterm-256color
+  colorscheme Tomorrow-Night-Eighties-My
+endif
 
 " Status Line *****************************************************************
 set showcmd
 set ruler 
 set laststatus=2
-set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P " show git branch
+"set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P " show git branch
+let g:Powerline_symbols = 'fancy' " the statusline of power and awesomness
 
 " Line Wrapping ***************************************************************
 set nowrap
@@ -87,7 +105,6 @@ set ofu=syntaxcomplete#Complete
 " Mouse ***********************************************************************
 set mouse=a " Enable the mouse
 set mousemodel=extend
-set term=xterm-256color
 
 " Misc settings ***************************************************************
 set number " Show line numbers
@@ -121,6 +138,10 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" CommandT for opening files fast, Tab limits scope to open in buffers
+map q :CommandT<CR>
+map <Tab> :CommandTBuffer<CR>
+
 " Map tab for indenting (alt-key, like in textmate)
 nmap <A-S-Tab> <<
 nmap <A-Tab> >>
@@ -143,6 +164,8 @@ nmap <Space> i_<Esc>r
 " https://github.com/henrik/dotfiles/commit/aaa45c1cc0f9a6195a9155223a7e904aa10b256f
 command! -bar -range=% NotRocket execute '<line1>,<line2>s/:\(\w\+\)\s*=>/\1:/e' . (&gdefault ? '' : 'g')
 
+nmap <silent> <Leader>z :execute 'ConqueTermVSplit zsh -l'<CR>
+
 " Omni Completion *************************************************************
 autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -156,10 +179,13 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " -----------------------------------------------------------------------------  
 " |                              Plug-ins                                     |
 " -----------------------------------------------------------------------------  
+ 
+set completefunc=syntaxcomplete#Complete
 
 " NERDTree ********************************************************************
 :noremap <Leader>n :NERDTreeToggle<CR>
