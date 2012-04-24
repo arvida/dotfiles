@@ -22,3 +22,5 @@
   ra = !git r --all
   l = log --graph --abbrev-commit --date local
   pr = pull --rebase 
+[core]
+	autocrlf = input
