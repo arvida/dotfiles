@@ -1,0 +1,23 @@
+#!/bin/bash
+
+GREEN="\033[0;32m" 
+RED="\033[0;31m" 
+END_COLOR="\033[0m"
+
+CONTINUE="n"
+
+while true; do
+  echo ""
+  echo -ne "${GREEN}♺${END_COLOR} ${1}"
+  echo ""
+  $1
+
+  echo ""
+  echo -ne "➜ Hit ${GREEN}return to run again${END_COLOR} or ${RED}q to quit${END_COLOR}: "; read CONTINUE;
+  if [ "$CONTINUE" == "q" ]; then
+    break
+  else
+    echo ""
+  fi
+done
+exit 0
