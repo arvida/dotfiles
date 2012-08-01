@@ -69,13 +69,13 @@ set smartcase " Ignore case when searching lowercase
 
 " Colors **********************************************************************
 if has("gui_running")
-  colorscheme Tomorrow-Night-Eighties-My
+  " colorscheme Tomorrow-Night-Eighties-My
 else
   syntax on
-  set background=dark
+  set background=light
   set t_Co=256 
   set term=xterm-256color
-  colorscheme Tomorrow-Night-Eighties-My
+  " colorscheme Tomorrow-Night-Eighties-My
 endif
 
 " Status Line *****************************************************************
@@ -180,6 +180,10 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+au BufNewFile,BufRead *.liquid set ft=liquid
+
+" Ctags
+set tags+=gems.tags
 
 " -----------------------------------------------------------------------------  
 " |                              Plug-ins                                     |
