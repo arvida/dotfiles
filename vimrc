@@ -18,7 +18,6 @@ call pathogen#infect()
 if has("gui_running")
   set shellcmdflag=-ic
   set guioptions=egmrt
-  set gfn=Menlo\ for\ Powerline:h14 
   set shell=bash
   set guioptions-=r 
 endif
@@ -31,7 +30,7 @@ set encoding=utf-8
 " Make clipboard work with MacOS
 set clipboard=unnamed
 
-autocmd FileType c,cpp,java,php,ruby,eruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType c,cpp,java,php,ruby,eruby,css,html,javascript autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
  
 " Tabs ************************************************************************
 set softtabstop=2
@@ -72,10 +71,10 @@ if has("gui_running")
   " colorscheme Tomorrow-Night-Eighties-My
 else
   syntax on
-  set background=light
+  "  set background=light
   set t_Co=256 
   set term=xterm-256color
-  " colorscheme Tomorrow-Night-Eighties-My
+  colorscheme Tomorrow-Night-Bright
 endif
 
 " Status Line *****************************************************************
@@ -152,12 +151,6 @@ vmap <A-Tab> >gv
 noremap <C-j> }
 noremap <C-k> {
 
-" Write to disk
-noremap ö :w<CR>
-
-" single character insert
-nmap <Space> i_<Esc>r
-
 " From: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 :nnoremap <CR> :nohlsearch<CR><CR>
 
@@ -181,9 +174,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 au BufNewFile,BufRead *.liquid set ft=liquid
-
-" Ctags
-set tags+=gems.tags
 
 " -----------------------------------------------------------------------------  
 " |                              Plug-ins                                     |

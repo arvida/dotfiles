@@ -623,9 +623,9 @@ class VimRubyCompletion
     variables = clean_sel( variables, message )
     classes = clean_sel( classes, message )
     valid = []
-    valid += methods.collect { |m| { :name => m, :type => 'f' } }
-    valid += variables.collect { |v| { :name => v, :type => 'v' } }
-    valid += classes.collect { |c| { :name => c, :type => 't' } }
+    valid += methods.collect { |m| { :name => m.to_s, :type => 'f' } }
+    valid += variables.collect { |v| { :name => v.to_s, :type => 'v' } }
+    valid += classes.collect { |c| { :name => c.to_s, :type => 't' } }
     valid.sort! { |x,y| x[:name] <=> y[:name] }
 
     outp = ""
