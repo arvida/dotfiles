@@ -1,0 +1,1 @@
+/Users/arvid/Projects/vim-open-rubygems/plugin/open-rubygems.vim
