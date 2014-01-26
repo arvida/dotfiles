@@ -31,6 +31,15 @@ set encoding=utf-8
 set clipboard=unnamed
 
 autocmd FileType c,cpp,java,php,ruby,eruby,css,html,javascript autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
+au BufRead,BufNewFile *.gotpl set filetype=gotpl 
+
+" Do not append line break at eol for erb
+autocmd FileType eruby,erb setlocal noeol
  
 " Tabs ************************************************************************
 set softtabstop=2
@@ -74,7 +83,9 @@ else
   "  set background=light
   set t_Co=256 
   set term=xterm-256color
-  colorscheme Tomorrow-Night-Bright
+  let base16colorspace=256
+  " colorscheme Tomorrow-Night-Bright
+  colorscheme base16-default
 endif
 
 " Status Line *****************************************************************
@@ -82,7 +93,7 @@ set showcmd
 set ruler 
 set laststatus=2
 "set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P " show git branch
-let g:Powerline_symbols = 'fancy' " the statusline of power and awesomness
+"let g:Powerline_symbols = 'fancy' " the statusline of power and awesomness
 
 " Line Wrapping ***************************************************************
 set nowrap
@@ -121,13 +132,6 @@ map j gj
 imap <down> <C-o>gj
 map E ge
 
-map <D-1> :bprev<CR>
-map <D-2> :bnext<CR>
-map <D-3> :BD<CR>
-
-map <Leader>1 :bprev<CR>
-map <Leader>2 :bnext<CR>
-map <Leader>3 :BD<CR>
 map <Leader>p <C-^>
 
 " Jan 11 2012
@@ -137,15 +141,8 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
-" CommandT for opening files fast, Tab limits scope to open in buffers
-map q :CommandT<CR>
-map <Tab> :CommandTBuffer<CR>
-
-" Map tab for indenting (alt-key, like in textmate)
-nmap <A-S-Tab> <<
-nmap <A-Tab> >>
-vmap <A-S-Tab> <gv
-vmap <A-Tab> >gv
+" CtrlP for opening files fast
+map q :CtrlPBuffer<CR>
 
 " Jump one paragraph with ctrl-key and j/k
 noremap <C-j> }
@@ -157,23 +154,21 @@ noremap <C-k> {
 " https://github.com/henrik/dotfiles/commit/aaa45c1cc0f9a6195a9155223a7e904aa10b256f
 command! -bar -range=% NotRocket execute '<line1>,<line2>s/:\(\w\+\)\s*=>/\1:/e' . (&gdefault ? '' : 'g')
 
-nmap <silent> <Leader>z :execute 'ConqueTermVSplit zsh -l'<CR>
-
-" Omni Completion *************************************************************
-autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-" May require ruby compiled in
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
-au BufNewFile,BufRead *.liquid set ft=liquid
+" From: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 
 " -----------------------------------------------------------------------------  
 " |                              Plug-ins                                     |
@@ -192,20 +187,3 @@ let NERDTreeMouseMode=1 " Single click for everything
 " map <Leader>b :FufBuffer<CR>
 let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db;.log'
 let g:fuzzy_enumerating_limit = 70
-
-" autocomplpop ***************************************************************
-" complete option
-"set complete=.,w,b,u,t,k
-"let g:AutoComplPop_CompleteOption = '.,w,b,u,t,k'
-"set complete=.
-"let g:AutoComplPop_IgnoreCaseOption = 0
-"let g:acp_behaviorKeywordLength = 5
-"let g:acp_behaviorRubyOmniMethodLength = 5
-"let g:acp_behaviorRubyOmniSymbolLength = 5
-"let g:acp_behaviorHtmlOmniLength = 5
-"let g:acp_behaviorCssOmniPropertyLength = 5
-"let g:acp_mappingDriven=1
-"
-" railsvim ***************************************************************
-map <Leader>ra :AS<CR>
-map <Leader>rs :RS<CR>
