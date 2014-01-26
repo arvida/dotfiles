@@ -1,0 +1,11 @@
+Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+StringLiterals:
+  Description: 'Checks if uses of quotes match the configured preference.'
+  Enabled: false
+MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 8
