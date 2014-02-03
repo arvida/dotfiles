@@ -98,7 +98,7 @@ set laststatus=2
 " Line Wrapping ***************************************************************
 set nowrap
 set linebreak  " Wrap at word
-set colorcolumn=100
+set colorcolumn=90
 
 " Directories *****************************************************************
 set backupdir=~/.vimfiles/backup
@@ -153,6 +153,8 @@ noremap <C-k> {
 
 " https://github.com/henrik/dotfiles/commit/aaa45c1cc0f9a6195a9155223a7e904aa10b256f
 command! -bar -range=% NotRocket execute '<line1>,<line2>s/:\(\w\+\)\s*=>/\1:/e' . (&gdefault ? '' : 'g')
+
+command! Restart execute '!touch tmp/restart.txt'
 
 " From: https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
