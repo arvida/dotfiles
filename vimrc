@@ -40,6 +40,8 @@ au BufRead,BufNewFile *.gotpl set filetype=gotpl
 
 " Do not append line break at eol for erb
 autocmd FileType eruby,erb setlocal noeol
+
+au BufNewFile,BufRead *.ejs set filetype=html
  
 " Tabs ************************************************************************
 set softtabstop=2
@@ -110,7 +112,9 @@ filetype plugin indent on
 set ofu=syntaxcomplete#Complete
 
 " Invisible characters *********************************************************
-:noremap <Leader>i :set list!<CR> " Toggle invisible chars
+set list!
+noremap <Leader>i :set list!<CR> " Toggle invisible chars
+set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
 " Mouse ***********************************************************************
 set mouse=a " Enable the mouse
