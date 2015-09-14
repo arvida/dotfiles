@@ -4,25 +4,19 @@
 " Hex colour conversion functions borrowed from the theme "Desert256""
 
 " Default GUI Colours
-let s:foreground = "f3f3f3"
+let s:foreground = "cccccc"
 let s:background = "2d2d2d"
-let s:gutter = "1f1f1f"
 let s:selection = "515151"
 let s:line = "393939"
 let s:comment = "999999"
 let s:red = "f2777a"
-let s:dark_red = "C20030"
-let s:dark_pink = "D1267E"
 let s:orange = "f99157"
 let s:yellow = "ffcc66"
-let s:dark_yellow = "FFaa00"
-let s:light_yellow = "F1F5C1"
-let s:green = "70FF70"
-let s:aqua = "33cccc"
+let s:green = "99cc99"
+let s:aqua = "009999"
 let s:blue = "99cccc"
-let s:purple = "F768F7"
-let s:light_purble = "F2B6F2"
-let s:string = "FAF9C8"
+let s:purple = "cc99cc"
+let s:window = "4d5057"
 
 set background=dark
 hi clear
@@ -237,35 +231,43 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 			exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
 		endif
 	endfun
+
 	" Vim Highlighting
 	call <SID>X("Normal", s:foreground, s:background, "")
-	call <SID>X("LineNr", s:foreground, s:gutter, "")
+	call <SID>X("LineNr", s:selection, "", "")
 	call <SID>X("NonText", s:selection, "", "")
 	call <SID>X("SpecialKey", s:selection, "", "")
 	call <SID>X("Search", s:background, s:yellow, "")
 	call <SID>X("TabLine", s:foreground, s:background, "reverse")
-	call <SID>X("StatusLine", s:foreground, s:background, "reverse")
-	call <SID>X("StatusLineNC", s:foreground, s:background, "reverse")
+	call <SID>X("StatusLine", s:window, s:yellow, "reverse")
+	call <SID>X("StatusLineNC", s:window, s:foreground, "reverse")
+	call <SID>X("VertSplit", s:window, s:window, "none")
 	call <SID>X("Visual", "", s:selection, "")
 	call <SID>X("Directory", s:blue, "", "")
 	call <SID>X("ModeMsg", s:green, "", "")
-    call <SID>X("MoreMsg", s:green, "", "")
+	call <SID>X("MoreMsg", s:green, "", "")
 	call <SID>X("Question", s:green, "", "")
 	call <SID>X("WarningMsg", s:red, "", "")
+	call <SID>X("MatchParen", "", s:selection, "")
+	call <SID>X("Folded", s:comment, s:background, "")
+	call <SID>X("FoldColumn", "", s:background, "")
 	if version >= 700
 		call <SID>X("CursorLine", "", s:line, "none")
 		call <SID>X("CursorColumn", "", s:line, "none")
 		call <SID>X("PMenu", s:foreground, s:selection, "none")
 		call <SID>X("PMenuSel", s:foreground, s:selection, "reverse")
 	end
+	if version >= 703
+		call <SID>X("ColorColumn", "", s:line, "none")
+	end
 
 	" Standard Highlighting
 	call <SID>X("Comment", s:comment, "", "")
-	call <SID>X("Todo", s:comment, "", "")
+	call <SID>X("Todo", s:comment, s:background, "")
 	call <SID>X("Title", s:comment, "", "")
 	call <SID>X("Identifier", s:red, "", "none")
 	call <SID>X("Statement", s:foreground, "", "")
-	call <SID>X("Conditional", s:light_purble, "", "")
+	call <SID>X("Conditional", s:foreground, "", "")
 	call <SID>X("Repeat", s:foreground, "", "")
 	call <SID>X("Structure", s:purple, "", "")
 	call <SID>X("Function", s:blue, "", "")
@@ -276,15 +278,17 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("Operator", s:aqua, "", "none")
 	call <SID>X("Type", s:blue, "", "none")
 	call <SID>X("Define", s:purple, "", "none")
-	call <SID>X("Include", s:blue, "", "") 
+	call <SID>X("Include", s:blue, "", "")
 	"call <SID>X("Ignore", "666666", "", "")
-	
+
 	" Vim Highlighting
 	call <SID>X("vimCommand", s:red, "", "none")
 
 	" C Highlighting
 	call <SID>X("cType", s:yellow, "", "")
 	call <SID>X("cStorageClass", s:purple, "", "")
+	call <SID>X("cConditional", s:purple, "", "")
+	call <SID>X("cRepeat", s:purple, "", "")
 
 	" PHP Highlighting
 	call <SID>X("phpVarSelector", s:red, "", "")
@@ -293,37 +297,42 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("phpConditional", s:purple, "", "")
 	call <SID>X("phpStatement", s:purple, "", "")
 	call <SID>X("phpMemberSelector", s:foreground, "", "")
-	
+
 	" Ruby Highlighting
-	call <SID>X("rubyString", s:string, "", "")
 	call <SID>X("rubySymbol", s:green, "", "")
-	call <SID>X("rubyConstant", s:aqua, "", "")
+	call <SID>X("rubyConstant", s:yellow, "", "")
 	call <SID>X("rubyAttribute", s:blue, "", "")
 	call <SID>X("rubyInclude", s:blue, "", "")
 	call <SID>X("rubyLocalVariableOrMethod", s:orange, "", "")
-	call <SID>X("rubyCurlyBlock", s:dark_yellow, "", "")
-	call <SID>X("rubyArrayDelimiter ", s:dark_yellow, "", "")
-	call <SID>X("rubySharpBang ", s:purple, "", "")
-	call <SID>X("rubyinclude ", s:dark_pink, "", "")
-	call <SID>X("rubyInterpolation ", s:foreground, "", "")
-	call <SID>X("rubyInterpolationDelimiter ", s:dark_yellow, "", "")
-	call <SID>X("rubyStringDelimiter ", s:orange, "", "")
-	call <SID>X("rubyAccess ", s:yellow, "", "")
-	call <SID>X("rubyException ", s:dark_red, "", "bold")
-	call <SID>X("rubyControl ", s:light_yellow, "", "")
+	call <SID>X("rubyCurlyBlock", s:orange, "", "")
+	call <SID>X("rubyStringDelimiter", s:green, "", "")
+	call <SID>X("rubyInterpolationDelimiter", s:orange, "", "")
+	call <SID>X("rubyConditional", s:purple, "", "")
+	call <SID>X("rubyRepeat", s:purple, "", "")
 
 	" Python Highlighting
 	call <SID>X("pythonInclude", s:purple, "", "")
 	call <SID>X("pythonStatement", s:purple, "", "")
 	call <SID>X("pythonConditional", s:purple, "", "")
 	call <SID>X("pythonFunction", s:blue, "", "")
-	
+
 	" JavaScript Highlighting
 	call <SID>X("javaScriptBraces", s:foreground, "", "")
 	call <SID>X("javaScriptFunction", s:purple, "", "")
 	call <SID>X("javaScriptConditional", s:purple, "", "")
+	call <SID>X("javaScriptRepeat", s:purple, "", "")
 	call <SID>X("javaScriptNumber", s:orange, "", "")
-	call <SID>X("javaScriptMember", s:orange, "", "")	
+	call <SID>X("javaScriptMember", s:orange, "", "")
+
+	" HTML Highlighting
+	call <SID>X("htmlTag", s:red, "", "")
+	call <SID>X("htmlTagName", s:red, "", "")
+	call <SID>X("htmlArg", s:red, "", "")
+	call <SID>X("htmlScriptTag", s:red, "", "")
+
+	" Diff Highlighting
+	call <SID>X("diffAdded", s:green, "", "")
+	call <SID>X("diffRemoved", s:red, "", "")
 
 	" Delete Functions
 	delf <SID>X
@@ -336,4 +345,3 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	delf <SID>grey_level
 	delf <SID>grey_number
 endif
-highlight ColorColumn ctermbg=232

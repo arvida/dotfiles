@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/arvid/Dropbox/Env/Sites/mendocino/widgets/flykten-slutar-har'
+let g:netrw_dirhist_2='/Users/arvid/Dropbox/Env/Sites/omni-recruit-web'
+let g:netrw_dirhist_3='/Users/arvid/Dropbox/Env/Sites/ostersjostiftelsen'
+let g:netrw_dirhist_4='/Users/arvid/Dropbox/Env/Sites/Unicef-3.0'
+let g:netrw_dirhist_5='/Users/arvid/Dropbox (Oktavilla)/Env/Sites/svd-frontend'
+let g:netrw_dirhist_6='/Users/arvid/Dropbox (Oktavilla)/Env/Sites/svd-mobile-frontend-framework/dist/css'
